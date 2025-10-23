@@ -1,11 +1,13 @@
 package battleships;
 
 public class BoardDemo {
-    public static void main() {
-        Board b1 = new Board(10,10);
+    public static void main() throws FailedToPlaceShipException {
+        Board b1 = new Board(50,50);
 
-        b1.setup();
-
+        //b1.setup();
+        for(int i = 0; i <100; i++) {
+            b1.placeShip(new Ship("battleship", "B", 5));
+        }
         b1.getSquare(0,0).setTried();
         b1.getSquare(0,1).setTried();
 
