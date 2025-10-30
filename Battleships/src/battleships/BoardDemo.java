@@ -1,13 +1,17 @@
 package battleships;
 
+
+
 public class BoardDemo {
     public static void main() throws FailedToPlaceShipException {
-        Board b1 = new Board(50,50);
+        Board b1 = new Board(10,10);
 
-        //b1.setup();
-        for(int i = 0; i <100; i++) {
-            b1.placeShip(new Ship("battleship", "B", 5));
-        }
+        Fleet fleet = new Fleet(1,2,3);
+        b1.setUp(fleet);
+
+
+
+        
         b1.getSquare(0,0).setTried();
         b1.getSquare(0,1).setTried();
 
@@ -36,6 +40,16 @@ public class BoardDemo {
         String[] b = b1.toStringArray(false);
         for(String r : b) {
             System.out.println(r);
+        }
+
+        System.out.println("NOW BOMBING TWO WHOLE ROWS TO TRY AND SINK SOMETHING:");
+        for(int y = 3; y < 5; y++) {
+            for(int x = 0; x < b1.getWidth(); x++) {
+                System.out.println("Bombing square x=" + x + ", y=" + y);
+                b1.dropBomb(x, y);
+                System.out.println(b1);
+                System.out.println();
+            }
         }
 
     }

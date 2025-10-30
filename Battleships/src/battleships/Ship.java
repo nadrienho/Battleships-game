@@ -6,6 +6,8 @@ public class Ship {
     private String name;
     private String code;
 
+    private int hits;
+
     private int squareCount;
     private int x;
     private int y;
@@ -76,6 +78,17 @@ public class Ship {
         final Rectangle2D rectOther = new Rectangle2D.Double(other.x, other.y, other.getWidth(), other.getHeight());
         final Rectangle2D intersection = rectThis.createIntersection(rectOther);
         return (intersection.getWidth() >= 0) && (intersection.getHeight() >= 0);
+    }
+
+    public boolean incrementHitCount() {
+        if (this.hits < this.squareCount) {
+            this.hits++;
+        }
+        return (this.hits == this.squareCount);
+    }
+
+    public boolean isSunk() {
+        return (this.hits == this.squareCount);
     }
 
     @Override

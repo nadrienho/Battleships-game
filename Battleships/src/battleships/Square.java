@@ -11,6 +11,9 @@ public class Square {
     }
     public void setTried() {
         this.tried = true;
+        if (this.ship != null) {
+            this.ship.incrementHitCount();
+        }
     }
 
     public Ship getShip() {

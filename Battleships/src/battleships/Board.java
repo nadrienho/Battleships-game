@@ -63,6 +63,12 @@ public class Board {
 //        getSquare(5,3).setShip(s);
 //    }
 
+    public void setUp(Fleet fleet) {
+        for(Ship s : fleet.getShips()) {
+            placeShip(s);
+        }
+    }
+
     public void placeShip(Ship ship) throws FailedToPlaceShipException {
         Random random = new Random();
         final int BREAK_THRESHOLD = 1000;
@@ -130,7 +136,14 @@ public class Board {
         Square square = getSquare(x, y);
         if (!square.isTried()) {
             square.setTried();
-            return square.isHit();
+            if (square.isHit()) {
+                if (square.getShip().isSunk()) {
+                    System.out.println( square.getShip().getName() + " SUNK!");
+                }
+                return true;
+            } else {
+                return false;
+            }
         } else {
             // this is a wasted turn - perhaps an exception would be a better idea?
             return false;
