@@ -4,9 +4,9 @@ package battleships;
 
 public class BoardDemo {
     public static void main() throws FailedToPlaceShipException {
-        Board b1 = new Board(10,10);
+        Board b1 = new Board(20,20);
 
-        Fleet fleet = new Fleet(1,2,3);
+        Fleet fleet = new Fleet(1,2,3, 4,1);
         b1.setUp(fleet);
 
 
