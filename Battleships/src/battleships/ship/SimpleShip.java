@@ -10,9 +10,6 @@ public abstract class SimpleShip extends Ship {
         super(name, code, squareCount);
     }
 
-//    public SimpleShip() {
-//        super(name, code, squareCount);
-//    }
 
     public void rotate() {
         this.horizontal = !this.horizontal;
