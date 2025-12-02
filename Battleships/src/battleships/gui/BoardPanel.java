@@ -1,5 +1,7 @@
 package battleships.gui;
 
+import battleships.AbstractGame;
+import battleships.AbstractPlayer;
 import battleships.Board;
 import battleships.BoardFactory;
 
@@ -10,9 +12,19 @@ public class BoardPanel extends JPanel {
     private Board board;
     private BoardButton[][] boardButtons;
 
-    public BoardPanel(Board board) {
-        super(new GridLayout(board.getHeight(),  board.getWidth()));
-        this.board = board;
+    private AbstractPlayer player;
+    private GamePanel gamePanel;
+
+
+
+
+    public BoardPanel(AbstractPlayer player, GamePanel gamePanel) {
+
+        super(new GridLayout(player.getBoard().getHeight(), player.getBoard().getWidth()));
+        setBorder(BorderFactory.createTitledBorder(player.getName()));
+        this.gamePanel = gamePanel;
+        this.board = player.getBoard();
+        this.player = player;
         this.boardButtons = new BoardButton[board.getHeight()][board.getWidth()];
         for (int y = 0; y < this.boardButtons.length; y++) {
             final int finalY = y;
@@ -28,7 +40,7 @@ public class BoardPanel extends JPanel {
 
     private void handleButton(final int x, final int y) {
         if (!this.board.getSquare(x,y).isTried()) {
-            System.out.println( "Player clicked " + x + ", " + y);
+            this.gamePanel.bombDropped(this.player, x,y);
         }
     }
 
@@ -48,18 +60,22 @@ public class BoardPanel extends JPanel {
             }
         }
     }
-    public static void launch(String[] args) {
-        JFrame f = new JFrame();
-        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        Board board = BoardFactory.getBigBoard();
-        BoardPanel bp = new BoardPanel(board);
-        bp.setShowShips(true);
-        f.add(bp);
-        f.pack();
-        f.setVisible(true);
+
+    public BoardButton getBoardButton(int x, int y) {
+        return this.boardButtons[y][x];
     }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> launch(args));
-    }
+//    public static void launch(String[] args) {
+//        JFrame f = new JFrame();
+//        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        Board board = BoardFactory.getBigBoard();
+//        BoardPanel bp = new BoardPanel(board);
+//        bp.setShowShips(true);
+//        f.add(bp);
+//        f.pack();
+//        f.setVisible(true);
+//    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> launch(args));
+//    }
 
 }
