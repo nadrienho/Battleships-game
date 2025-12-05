@@ -4,6 +4,7 @@ import java.util.*;
 public class Board {
     private int width;
     private int height;
+    private Fleet fleet;
 
     private Square[][] board;
 
@@ -64,9 +65,14 @@ public class Board {
 //    }
 
     public void setUp(Fleet fleet) {
+        this.fleet = fleet;
         for(Ship s : fleet.getShips()) {
             placeShip(s);
         }
+    }
+
+    public Fleet getFleet() {
+        return this.fleet;
     }
 
     public void placeShip(Ship ship) throws FailedToPlaceShipException {
